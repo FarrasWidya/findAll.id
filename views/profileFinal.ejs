@@ -8,19 +8,81 @@
     <title>Hello, world!</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Find All</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" aria-current="page" href="/">Profile</a>
+            <a class="nav-link" href="/profile/<%= data.id %>/logout">Log Out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
     <div class="bannerHomepage ">
       <div class="content">
-        <h1 class="color-findall">Welcome,"MR/MRS/MS" "USER"</h1>
+        <h1 class="color-findall">Welcome, <% if (data.gender.toLowerCase() === `male`) { %>
+         Mr.
+        <% }else { %>
+         Ms. 
+        <% } %>
+         <%= data.username %></h1>
         <h4></h4>
         <h4></h4>
-        <label for="">Tell me what you need</label><br><br>
-        <a class="btn btn-secondary" href="#" role="button">Add Task</a>
+        <label for="">Tell us what you need</label><br><br>
+        <a class="btn btn-secondary" href="/profile/<%= data.id %>/newTask" role="button">Add Task</a>
         <a class="btn btn-secondary" href="#" role="button">List Task</a>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
         </div>
-      </div>
+      </div><br><br><br>
+
+      <div>
+        <div class="bd-example">
+          <label for="">Your task history:</label>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Task</th>
+            <th scope="col">Posted At</th>
+            <th scope="col">Handling Agent</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            <% let num = 1 %>
+            <% data.Tasks.forEach(x=> { %>
+
+            
+          <tr>
+            <th scope="row"><%= num %></th>
+            <td><%= x.title %></td>
+            <td><%= x.createdAt %></td>
+            <td><%= x.Agent.name %></td>
+            <% if (x.isCompleted === false) { %>
+            <td>On Going</td>
+            <td>
+              <% }else { %>
+                <td>Completed</td>
+              <td>
+                <% } %>
+              <a href="/profile/<%= data.id %>/<%= x.id %>"><button>See Detail</button></a>
+            </td>
+          </tr>
+
+        <% num++ }) %>
+          </tbody>
+        </table>
+        </div>
+
   </body>
+  
 </html>

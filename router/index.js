@@ -21,14 +21,7 @@ inRouter.post(`/register`, userController.postRegister)
 inRouter.get('/login', userController.loginform)
 inRouter.post('/login', userController.postLogin)
 
-// inRouter.use((req,res,next) => {
-//   if(req.session.profile) {
-//     next()
-//   } else {
-//     let errors = "Please log in first"
-//     res.redirect(`/login?errors=${errors}`)
-//   }
-// })
+
 inRouter.use(function(req,res,next){
 if (!req.session.userId) {
   const error = `Please Log in!`

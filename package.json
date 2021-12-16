@@ -16,8 +16,7 @@
     "express-session": "^1.17.2",
     "nodemailer": "^6.7.2",
     "pg": "^8.7.1",
-    "sequelize": "^6.12.0-beta.3",
-    "sequelize-cli": "^6.3.0"
+    "sequelize": "^6.12.0-beta.3"
   },
   "repository": {
     "type": "git",
@@ -26,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/FarrasWidya/findAll.id/issues"
   },
-  "homepage": "https://github.com/FarrasWidya/findAll.id#readme"
+  "homepage": "https://github.com/FarrasWidya/findAll.id#readme",
+  "devDependencies": {
+    "sequelize-cli": "^6.3.0"
+  }
 }

@@ -21,6 +21,7 @@ class Controller {
         }]
       })
       .then(data => {
+        console.log(data)
         res.render(`profileFinal`, {data})
       })
       .catch(err=> {
@@ -113,7 +114,9 @@ class Controller {
     }
 
     static taskCompleted(req,res){
-      Task.update({isCompleted: true}, {
+      Task.update({
+        isCompleted: true
+      }, {
         where: {
           id: req.params.taskId
         }
@@ -124,10 +127,26 @@ class Controller {
       .catch(err=>{
         res.send(err)
       })
-    }
+    } 
+
+    /*
+static approveApplicant(req,res){
+    Applicant.update({
+      "status" : "approved"
+    },{
+      where : {id : req.params.ApplicantId}
+    })
+    .then(data =>{
+      res.redirect(`/hiring/${req.params.JobId}/detail`)
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+    */
 
     static cancelTask(req,res){
-      Task.delete({
+      Task.destroy({
         where: {
           id: req.params.taskId
         }
@@ -138,7 +157,7 @@ class Controller {
       .catch(err=>{
         res.send(err)
       })
-    }
+    } // -------------> cancel task (destroy)
 
     static logout(req,res){
       req.session.destroy(err=>{
@@ -149,6 +168,7 @@ class Controller {
         }
       })
     }
+
 
 }
 

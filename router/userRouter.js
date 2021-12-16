@@ -2,22 +2,7 @@ const express = require('express');
 const userRouter = express.Router()
 const Controller = require('../controllers/controller');
 
-// userRouter.get('/register', (req, res) => {
-//   res.send('Hello World!')
-// })//register
-// userRouter.post('/register', (req, res) => {
-//   res.send('Hello World!')
-// })//register
-// userRouter.get('/login', (req, res) => {
-//   res.send('Hello World!')
-// })//login
-// userRouter.post('/login', (req, res) => {
-//   res.send('Hello World!')
-// })//login
 
-// userRouter.get('/profile', (req, res) => {
-//   res.send('Hello World!')
-// })//profile - add task -task list
 userRouter.get('/task', (req, res) => {
   res.send('Hello World!')
 })// list task

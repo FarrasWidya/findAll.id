@@ -3,7 +3,7 @@ const express = require('express')
 const req = require('express/lib/request')
 const indexRouter = express.Router()
 const Controller = require('../controllers/controller');
-
+const userController = require('../controllers/userController');
 
 indexRouter.get('/', Controller.homepage)// isiny homepage dan login/register
 
@@ -15,11 +15,20 @@ indexRouter.use('/', userRouter)
 
 
 
-
 inRouter.get('/', Controller.homepage)
+inRouter.get(`/register`, userController.registerForm)
+inRouter.post(`/register`, userController.postRegister)
+inRouter.get('/login', userController.loginform)
+inRouter.post('/login', userController.postLogin)
 
-inRouter.get(`/register`, Controller.registerPage)
-inRouter.post(`/register`, Controller.createUser)
+// inRouter.use((req,res,next) => {
+//   if(req.session.profile) {
+//     next()
+//   } else {
+//     let errors = "Please log in first"
+//     res.redirect(`/login?errors=${errors}`)
+//   }
+// })
 
 inRouter.get(`/profile/:profileId`, Controller.profile)
 

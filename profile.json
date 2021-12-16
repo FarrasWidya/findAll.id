@@ -1,0 +1,26 @@
+[{
+  "username": "gcharlet0",
+  "age": 40,
+  "gender": "Male",
+  "UserId": 1
+}, {
+  "username": "wpideon1",
+  "age": 34,
+  "gender": "Male",
+  "UserId": 2
+}, {
+  "username": "twoolaston2",
+  "age": 25,
+  "gender": "Female",
+  "UserId": 3
+}, {
+  "username": "rsheen3",
+  "age": 30,
+  "gender": "Male",
+  "UserId": 4
+}, {
+  "username": "ksowrey4",
+  "age": 31,
+  "gender": "Male",
+  "UserId": 5
+}]

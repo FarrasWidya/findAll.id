@@ -10,39 +10,13 @@ class Controller {
       
     }
 
-    static createUser(req,res){
-      valUser = {
-        email: req.body.email,
-        password: req.body.password,
-        role: `reguler`
-      }
-      valProfie = {
-        name: req.body.name,
-        age: req.body.age,
-        gender: req.body.gender,
-        ktp: req.body.ktp
-      }
-      User.create(valUser)
-      .then(data=>{
-        Profile.create(valProfile)
-        .then(data2 => {
-          res.redirect(`/profile/${data.id}`)
-        })
-        .catch(err2=> {
-          res.send(err)
-        })
-      })
-      .catch(err=>{
-        res.send(err)
-      })
-    }
-
     static profile(req,res){
       Profile.findByPk(req.params.profileId, {
-        include: [Task, Agent]
+        include: Task
       })
       .then(data => {
-        res.render(`profile`, {data})
+        console.log(data)
+        res.render(`profileFinal`, {data})
       })
       .catch(err=> {
         res.send(err)

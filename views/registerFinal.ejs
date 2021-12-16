@@ -11,22 +11,22 @@
     <div class="bannerRegister">
     <div class="content">
       <h1>Register</h1> 
-      <form action="">
+      <form action="/register" method="post" >
         <label for="">E-mail</label><br>
         <input type="text" name="email"><br><br>
         <label for="">Password</label><br>
-        <input type="text" name="password"><br><br>
+        <input type="password" name="password"><br><br>
         <label for="">Username</label><br>
         <input type="text" name="username"><br><br>
         <label for="">Age</label><br>
         <input type="number" name="age"><br><br>
         <label for="">Gender</label><br>
-        <select name="" id="">
+        <select name="gender" id="">
           <option value="" selected disabled>-Select One-</option>
-          <option value="">Male</option>
-          <option value="">Female</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
         </select><br><br>
-        <a class="btn btn-secondary" href="#" role="button">Register</a>
+        <input type="submit" value="Register">
       </form><br>
     </div>
   </div>

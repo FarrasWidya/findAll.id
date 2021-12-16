@@ -1,4 +1,5 @@
 const {Agent,Profile,User,Task} = require('../models/index');
+const nodemailer = require(`../helpers/nodeMailer.js`)
 
 class Controller {
 
@@ -12,10 +13,14 @@ class Controller {
 
     static profile(req,res){
       Profile.findByPk(req.params.profileId, {
-        include: Task
+        include: [{
+          model: Task,
+          include: {
+            model: Agent
+          }
+        }]
       })
       .then(data => {
-        console.log(data)
         res.render(`profileFinal`, {data})
       })
       .catch(err=> {
@@ -24,7 +29,34 @@ class Controller {
     }
 
     static addTask(req,res){
-      res.render(`addTask`)
+      let thisone = {include: Task}
+      let thitwo = 1;
+      let thisid = {id: req.params.profileId}
+      if (req.query.expertise) {
+        thisone.where = {expertise: req.query.expertise}
+        thitwo++
+      }
+      if (req.query.order) {
+        thisone.order = [req.query.order, `DESC`]
+        thitwo++
+      }
+      if (thitwo > 1) {
+        Agent.findAll(thisone)
+        .then(data=>{
+          res.render(`addTask`, {data, thisid})
+        })
+        .catch(err=>{
+          res.send(err)
+        })
+      }else {
+        Agent.findAll(thisone)
+        .then(data=>{
+          res.render(`addTask`, {data, thisid})
+        })
+        .catch(err2=>{
+          res.send(err2)
+        })
+      }
     }
 
     static addTaskPost(req,res){
@@ -36,12 +68,21 @@ class Controller {
         lastSeenDate: req.body.lastSeenDate,
         imageUrl: req.body.imageUrl,
         isCompleted: false,
-        ProfileId: req.params.ProfileId,
-        AgentId: req.params.AgentId
+        ProfileId: req.params.profileId,
+        AgentId: req.body.AgentId
       } 
       Task.create(value)
       .then(data=>{
-        res.redirect(`/profile/${req.params.ProfileId}/confirmPage`)
+        Profile.findByPk(req.params.profileId, {
+          include: User
+        })
+        .then(data2=> {
+          nodemailer(data2.User.email)
+          res.redirect(`/profile/${req.params.profileId}/confirmPage`)
+        })
+        .catch(err=> {
+          res.send(err)
+        })
       })
       .catch(err=>{
         res.send(err)
@@ -59,6 +100,8 @@ class Controller {
     static detailTask(req,res){
       Task.findByPk(req.params.taskId, {
         include: Agent
+      },{
+        include: Profile
       })
       .then(data =>{
         res.render(`detailTask`, {data})
@@ -94,6 +137,16 @@ class Controller {
       })
       .catch(err=>{
         res.send(err)
+      })
+    }
+
+    static logout(req,res){
+      req.session.destroy(err=>{
+        if(err){
+          res.send(err)
+        }else{
+          res.redirect('/login')
+        }
       })
     }
 

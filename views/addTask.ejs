@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Album example · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="/bootstrap.min.css" rel="stylesheet"  type="text/css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+  </head>
+<body>
+  <h1>Add New Task</h1>
+  <h6>Agent Settings</h6>
+  <form action="/profile/<%= thisid.id %>/newTask" method="get">
+    <select name="expertise">
+      <option value="">--Filter by Expertise--</option>
+      <option value="Field Search">Field Search</option>
+      <option value="Criminology">Criminology</option>
+      <option value="Middle Man">Middle Man</option>
+      <option value="Others">Others</option>
+    </select>
+    <select name="order">
+      <option value="">--Sort by--</option>
+      <option value="usualFee">Most expensive</option>
+      <option value="rating">Highest rated</option>
+      <option value="age">Oldest</option>
+    </select>
+    <input type="submit" value="Apply Settings">
+  </form>
+  <br><br>
+  <form action="/profile/<%= thisid.id %>/newTask" method="post">
+    <label for="title">Task Title</label><br>
+    <input type="text" name= title><br><br>
+    <label for="searchingFor">What are searching for?</label><br>
+    <select name="searchingFor">
+      <option value="">--Choose--</option>
+      <option value="Person">Person</option>
+      <option value="Pet">Pet</option>
+      <option value="Belongings">Belongings</option>
+      <option value="Others">Others</option>
+    </select><br><br>
+    <label for="description">Tell Us More</label><br>
+    <textarea name="description" rows="4" cols="50"></textarea><br><br>
+    <label for="lastSeenAt">Last seen in?</label><br>
+    <input type="text" name="lastSeenAt"><br>
+    <input type="date" name="lastSeenDate"><br><br>
+    <label for="imageUrl">Url of an Image that could give your Agent a clue (related picture of what you are searching for, or where exactly you last saw them)</label><br>
+    <input type="url" name="imageUrl"><br><br>
+
+  
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 g-1">
+          
+          <% data.forEach(x=> { %>
+            
+          <input type="radio" name='AgentId' id="thing1" class="input" value="<%= x.id %>">
+          <label for="thing1" class="input">
+          <div class="input">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+  
+              <div class="card-body">
+                <p class="card-text">Name: <%= x.name %> <br> 
+                  Age: <%= x.age %> <br>
+                 Gender:  <%= x.gender %> <br>
+                  Expertise: <%= x.expertise %> <br>
+                  Rating: <%= x.rating %>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">
+                    Usual Fee: $<%= x.usualFee %>,00 </small>
+                  <small class="text-muted">Ongoing Task(s): <%= x.Tasks.length %></small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+          <% }) %>
+          
+
+
+
+        </div>
+      </div>
+    </div>
+    <input type="submit" value="Add New Task">
+  </form><br><br>
+
+</body>
+</html>

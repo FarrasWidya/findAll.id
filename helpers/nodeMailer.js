@@ -12,8 +12,8 @@ function sendMail(email) {
     let mailOptions = {
       from: 'findidpair@gmail.com',
       to: email,
-      subject: 'WELCOME!',
-      text: `Welcome to our app!`
+      subject: 'Confirmation for FindAll',
+      text: `ini ceritanya proses verivikasi tapi karena abis waktu cuma teks doang deh`
     };
   
     return transporter.sendMail(mailOptions, (err, info) => {
